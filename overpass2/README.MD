@@ -15,7 +15,7 @@ Task 1 Forensics - Analyse the PCAP
 Just open up the .pcap file do the necessary analysis to get the answer
 
 carcking the the hashes is relatively easy with john + fasttrack wordlist (/usr/share/wordlists/fasttrack.txt)
-
+******
 
 Task 2 Research - Analyse the code 
 
