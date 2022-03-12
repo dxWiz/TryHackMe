@@ -18,9 +18,9 @@ carcking the the hashes is relatively easy with john + fasttrack wordlist (/usr/
 ******
 
 Task 2 Research - Analyse the code 
-
-Study the source code from https://github.com/NinjaJc01/ssh-backdoor
 ---
+Study the source code from https://github.com/NinjaJc01/ssh-backdoor
+
 
 
 To crack the salted hash with john and rockyou.txt
