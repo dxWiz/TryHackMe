@@ -11,7 +11,7 @@ It is recommended I do are rewrite on this incomplete research
 
 
 Task 1 Forensics - Analyse the PCAP 
-
+---
 Just open up the .pcap file do the necessary analysis to get the answer
 
 carcking the the hashes is relatively easy with john + fasttrack wordlist (/usr/share/wordlists/fasttrack.txt)
@@ -55,5 +55,5 @@ raw2dyna is a program that convert ASCII char into equivalent hexadecimal value.
 
 
 Task 3 Attack - Get back in! 
-
+---
 To be continued....
