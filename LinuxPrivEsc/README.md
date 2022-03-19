@@ -37,3 +37,20 @@ Result returned from exploit DB
 The overall idea is to create a perl module with the extension of .pm and run exploitable exim with the argument -ps to get root shell.
 
 # Task 12 SUID / SGID Executables - Shared Object Injection 
+
+# Task 18 Passwords & Keys - SSH Keys 
+
+When you are trying to ssh with the private key otained from the target with the following command
+
+    ssh -i root_key root@$IP
+    
+and encounter the following error
+    
+    sign_and_send_pubkey: no mutual signature supported
+    
+please add additional line in ~/.ssh/config as following
+
+    PubkeyAcceptedKeyTypes +ssh-rsa
+
+    
+
