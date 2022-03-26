@@ -110,4 +110,14 @@ To run the exploit, just type `run` or `exploit` and wait patiently until you se
 
 Go to C:\users\bill\desktop and `type user.txt` to get the flag for the last question
 
-# Task 3 Privilege Escalation  
+# Task 3 Privilege Escalation 
+
+Just follow the instrcution and use metasploit to continue with the studies.
+
+# Task 4 Access and Escalation Without Metasploit (python3 friendly)
+
+For this task, in the latest release of python, urllib2 is gone and hence we need to use a tool name 2to3 to convert the exploit script 39161.py to a python3 friend 39161.py with the following command
+
+`2to3 39161.py -w` this will create a backup of the original script and rewrite the script to python version3. If you do not have 2to3 in your machine, just install it `sudo apt install 2to3`
+
+By now you should be ready with the new script. Start a simple HTTP server `python3 -m http.server` and listen to a port of your choice with `nc` and then try running the script twice as instructed. You should be able to get a callback.
