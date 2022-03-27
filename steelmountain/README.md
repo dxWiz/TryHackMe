@@ -120,4 +120,4 @@ For this task, in the latest release of python, urllib2 is gone and hence we nee
 
 `2to3 39161.py -w` this will create a backup of the original script and rewrite the script to python version3. If you do not have 2to3 in your machine, just install it `sudo apt install 2to3`
 
-By now you should be ready with the new script. Start a simple HTTP server `python3 -m http.server` and listen to a port of your choice with `nc` and then try running the script twice as instructed. You should be able to get a callback.
+By now you should be ready with the new script. Start a simple HTTP server `python3 -m http.server 80` (take note the default port is 8000 if unspecified) and listen to a port of your choice with `nc` and then try running the script twice as instructed. You should be able to get a callback.
