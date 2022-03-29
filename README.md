@@ -8,5 +8,5 @@ All the folders created contain writing on my personal learning experience and k
 
 Thank You.
 
-***I may not be the best but I strive to learn to be one of the best.***
+***I might not be the best but I strive to learn and be better.***
 
