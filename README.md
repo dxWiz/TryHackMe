@@ -1,4 +1,4 @@
-# TryHackMe
+# Try Hack Me
 
 Actively participating in [TryHackMe](http://https://tryhackme.com) to learn pentesting and cyber security.
 
