@@ -65,7 +65,7 @@ I started of with an nmap scan and found out that the IP has a few interesting o
     Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     # Nmap done at Tue Mar 29 07:31:50 2022 -- 1 IP address (1 host up) scanned in 74.70 seconds
 
-By looking at the question, it is asking what other tool can be used to enumerate port 139/445 and the answer is `enum4linux`. Let's do that with the following command.
+By looking at the question, it is asking what other tool can be used to enumerate port 139/445 and the answer is `enum4linux`. Let's do that with the following command.  
 `enum4linux -a $IP`. -a is to do all the test and below is the results.
 
     Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sat Apr  2 10:19:33 2022
@@ -272,3 +272,5 @@ The two notable accounts found are svc-admin and backup.
 
 # Task 5 Exploitation Abusing Kerberos
 # Task 6 Enumeration Back to the Basics
+# Task 7 Domain Privilege Escalation Elevating Privileges within the Domain
+# Task 8 Flag Submission Flag Submission Panel 
