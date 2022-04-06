@@ -110,3 +110,5 @@ For the third and hidden Flag the hint given is `Did you see any identical files
 
 Congratulations.
 
+
+There is another way to get the second flag which is to crack the hash
