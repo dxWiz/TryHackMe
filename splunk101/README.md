@@ -19,6 +19,9 @@ No answer needed
 Instal Microsoft Sysmon on the desktop with the `install app from file` button and look for the folder name and version after the installation
 
 # Task 4 Adding Data
+
+Add data by using the `Settings > Data Inputs > Local event log collection` and look for `Microsoft-Windows-0Sysmon/Operational` then add and save. Upload the tutorial data on the desktop, after uploading click on `Start Searching` and wait for the total events as the answer.
+
 # Task 5 Splunk Queries
 # Task 6 Sigma Rules
 # Task 7 Dashboards & Visualizations
