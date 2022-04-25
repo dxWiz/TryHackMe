@@ -7,6 +7,9 @@ date : 25 Apr 2022
 
 
 # Task 1 Introduction to Splunk
+
+Deply the machine
+
 # Task 2 Navigating Splunk
 # Task 3 Splunk Apps
 # Task 4 Adding Data
