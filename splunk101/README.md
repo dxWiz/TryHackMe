@@ -27,6 +27,11 @@ Add data by using the `Settings > Data Inputs > Local event log collection` and 
 Search using `All time` and you will be able to get all the answers for this section.
 
 # Task 6 Sigma Rules
+
+Important website : https://uncoder.io/ & https://github.com/SigmaHQ/sigma
+
+Use [this](https://github.com/SigmaHQ/sigma/blob/master/rules/windows/create_remote_thread/sysmon_cactustorch.yml) to solve the problem.
+
 # Task 7 Dashboards & Visualizations
 # Task 8 Alerts
 # Task 9 Conclusion 
