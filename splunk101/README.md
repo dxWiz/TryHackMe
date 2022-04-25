@@ -30,7 +30,7 @@ Search using `All time` and you will be able to get all the answers for this sec
 
 Important website : https://uncoder.io/ & https://github.com/SigmaHQ/sigma
 
-Use [this](https://github.com/SigmaHQ/sigma/blob/master/rules/windows/create_remote_thread/sysmon_cactustorch.yml) to solve the problem.
+Use [this](https://github.com/SigmaHQ/sigma/blob/master/rules/windows/create_remote_thread/sysmon_cactustorch.yml) to get the answer for 'CACTUSTORCH Remote Thread Creation'.
 
 # Task 7 Dashboards & Visualizations
 # Task 8 Alerts
