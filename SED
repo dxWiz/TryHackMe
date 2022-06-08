@@ -1,0 +1,5 @@
+To delete last line with sed (stream editor)
+
+sed -i '$d' /etc/hosts
+
+-i is to delete the last line in the file instead of displaying the result in stdout.
